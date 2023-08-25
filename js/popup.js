@@ -7,11 +7,23 @@ function sendToggleRulerMessage(state) {
   });
 }
 
+function setRulerImage(state) {
+  image.src = state ? "../images/ruler.png" : "../images/ruler-inactive.png";
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  const isActiveSaved = localStorage.getItem("isActive");
+
+  if (isActiveSaved) {
+    setRulerImage(isActiveSaved === "true");
+  }
+});
+
 image.addEventListener("click", function (e) {
   const isActive = e.target.src.includes("inactive") ? false : true;
+  const newState = !isActive;
 
-  e.target.src = isActive
-    ? "../images/ruler-inactive.png"
-    : "../images/ruler.png";
-  sendToggleRulerMessage(!isActive);
+  localStorage.setItem("isActive", newState);
+  sendToggleRulerMessage(newState);
+  setRulerImage(newState);
 });
