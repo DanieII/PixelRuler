@@ -14,7 +14,7 @@ function setRulerImage(state) {
 document.addEventListener("DOMContentLoaded", function () {
   const isActiveSaved = localStorage.getItem("isActive");
 
-  if (isActiveSaved) {
+  if (isActiveSaved != "null") {
     setRulerImage(isActiveSaved === "true");
   }
 });
